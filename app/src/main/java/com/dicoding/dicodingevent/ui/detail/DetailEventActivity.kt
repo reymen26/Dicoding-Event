@@ -27,6 +27,8 @@ class DetailEventActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        viewModel.setLoading(true)
+
         // Ambil data dari Intent dan masukkan ke ViewModel
         val event = intent.getParcelableExtra<ListEventsItem>(EXTRA_EVENT)
         if (event != null) {
@@ -72,6 +74,12 @@ class DetailEventActivity : AppCompatActivity() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.detailEventFragment.visibility = View.GONE
+        } else {
+            binding.progressBar.visibility = View.GONE
+            binding.detailEventFragment.visibility = View.VISIBLE
+        }
     }
 }

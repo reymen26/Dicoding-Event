@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_finished" />
 
     <fragment
-        android:id="@+id/fab"
-        android:name="com.dicoding.dicodingevent.ui.upcoming.UpcomingFragment"
+        android:id="@+id/navigation_home"
+        android:name="com.dicoding.dicodingevent.ui.home.HomeFragment"
         tools:layout="@layout/fragment_home" />
 
 

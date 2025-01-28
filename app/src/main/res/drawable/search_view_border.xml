@@ -3,6 +3,6 @@
     <solid android:color="@android:color/transparent" />
     <corners android:radius="8dp" />
     <stroke
-        android:width="3dp"
+        android:width="2dp"
         android:color="?attr/borderSearchBarColor" />
 </shape>

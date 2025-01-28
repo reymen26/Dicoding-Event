@@ -10,14 +10,16 @@ class DetailEventViewModel : ViewModel() {
     private val _event = MutableLiveData<ListEventsItem>()
     val event: LiveData<ListEventsItem> get() = _event
 
-    private val _isLoading = MutableLiveData<Boolean>()
+    private val _isLoading = MutableLiveData<Boolean>().apply { value = true }
     val isLoading: LiveData<Boolean> get() = _isLoading
 
     fun setEvent(event: ListEventsItem) {
         _event.value = event
+        setLoading(false)
     }
 
     fun setLoading(isLoading: Boolean) {
         _isLoading.value = isLoading
     }
 }
+
