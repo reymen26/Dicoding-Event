@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.dicoding.dicodingevent.data.local.entity.EventEntity
 import com.dicoding.dicodingevent.data.response.ListEventsItem
 import com.dicoding.dicodingevent.databinding.ItemEventBinding
 
@@ -56,6 +57,29 @@ class EventAdapter : ListAdapter<ListEventsItem, EventAdapter.MyViewHolder>(DIFF
                 return oldItem == newItem
             }
         }
+    }
+
+    // Fungsi untuk mengonversi FavoriteEvent ke ListEventsItem
+    fun submitFavoriteList(favoriteEvents: List<EventEntity>) {
+        val eventList = favoriteEvents.map { favoriteEvent ->
+            ListEventsItem(
+                id = favoriteEvent.id,
+                name = favoriteEvent.name,
+                description = "",
+                summary = "",
+                mediaCover = favoriteEvent.mediaCover ?: "",
+                registrants = 0,
+                imageLogo = "",
+                link = "",
+                ownerName = "",
+                cityName = "",
+                quota = 0,
+                beginTime = "",
+                endTime = "",
+                category = "",
+            )
+        }
+        submitList(eventList)
     }
 
     interface OnItemClickCallback {

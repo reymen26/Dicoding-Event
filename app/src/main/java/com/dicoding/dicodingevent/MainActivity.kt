@@ -42,7 +42,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val bottomnavigation: BottomNavigationView = binding.bottomNavigation
-        bottomnavigation.background = null
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each
@@ -51,18 +50,13 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.navigation_upcoming,
                 R.id.navigation_finished,
+                R.id.navigation_home,
                 R.id.navigation_favorite,
                 R.id.navigation_settings
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottomnavigation.setupWithNavController(navController)
-
-        val fab: FloatingActionButton = binding.fabHome
-        fab.setOnClickListener {
-            val navController = findNavController(R.id.nav_host_fragment_activity_main)
-            navController.navigate(R.id.navigation_home)
-        }
 
     }
 }

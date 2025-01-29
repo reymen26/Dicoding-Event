@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Bottom bar -->
     <attr name="bottomBarColor" format="color" />
     <attr name="borderSearchBarColor" format="color" />
+
+    <attr name="itemIconColor" format="color" />
+    <attr name="itemTextColor" format="color" />
+
+    <!-- Settings Page -->
+    <attr name="settingIconColor" format="color" />
 </resources>

@@ -1,60 +1,81 @@
 package com.dicoding.dicodingevent.ui.favorite
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.dicoding.dicodingevent.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.dicoding.dicodingevent.adapter.EventAdapter
+import com.dicoding.dicodingevent.data.response.ListEventsItem
+import com.dicoding.dicodingevent.databinding.FragmentFavoriteBinding
+import com.dicoding.dicodingevent.di.Injection
+import com.dicoding.dicodingevent.ui.detail.DetailEventActivity
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FavoriteFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FavoriteFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var viewModel: FavoriteViewModel
+    private lateinit var eventAdapter: EventAdapter
+    private lateinit var binding: FragmentFavoriteBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentFavoriteBinding.inflate(inflater, container, false)
+
+        viewModel = Injection.provideFavoriteViewModel(this, requireContext())
+
+        eventAdapter = EventAdapter()
+        binding.rvFavorit.adapter = eventAdapter
+        binding.rvFavorit.layoutManager = LinearLayoutManager(context)
+
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
+            showLoading(isLoading)
+        })
+
+        // Observe daftar event favorit dari ViewModel
+        viewModel.events.observe(viewLifecycleOwner) { favoriteEvents ->
+            Log.d("FavoriteFragment", "Number of favorite events: ${favoriteEvents.size}")
+            favoriteEvents?.let {
+                eventAdapter.submitFavoriteList(it)  // Mengirim data favorit ke adapter
+                binding.rvFavorit.visibility = if (it.isNotEmpty()) View.VISIBLE else View.GONE
+            } ?: run {
+                Log.d("FavoriteFragment", "favoriteEvents is null")
+            }
+        }
+
+        eventAdapter.setOnItemClickCallback(object : EventAdapter.OnItemClickCallback {
+            override fun onItemClicked(event: ListEventsItem) {
+                Log.d("FavoriteFragment", "Item clicked: $event")
+                showSelectedEvent(event)
+            }
+        })
+
+        viewModel.getAllFavorites()
+
+        return binding.root
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.rvFavorit.visibility = View.GONE
+        } else {
+            binding.progressBar.visibility = View.GONE
+            binding.rvFavorit.visibility = View.VISIBLE
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorite, container, false)
+    private fun showSelectedEvent(data: ListEventsItem) {
+        val intent = Intent(requireContext(), DetailEventActivity::class.java)
+        intent.putExtra(DetailEventActivity.EXTRA_EVENT, data)
+        startActivity(intent)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FavoriteFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FavoriteFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onResume() {
+        super.onResume()
+        viewModel.getAllFavorites()
     }
 }
