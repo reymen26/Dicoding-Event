@@ -27,8 +27,6 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (requireActivity() as? AppCompatActivity)?.supportActionBar?.hide()
-
         // Inisialisasi DataStore dan ViewModel
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
         val settingViewModel = ViewModelProvider(

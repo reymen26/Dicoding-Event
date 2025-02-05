@@ -14,8 +14,10 @@
     <string name="tv_quota">Remaining quota : </string>
 
     <string name="event_not_found">Event not found</string>
+    <string name="favorite_event_not_found">Favorite event not found</string>
     <string name="register">Register Click Here!</string>
-    <string name="empty_message">tidak ada event tersedia</string>
+    <string name="register_disable">The Event Has Ended!</string>
+
     <string name="dark_mode">Dark Mode</string>
     <string name="save_favorite">Save Favorite</string>
     <string name="remove_favorite">Remove Favorite</string>

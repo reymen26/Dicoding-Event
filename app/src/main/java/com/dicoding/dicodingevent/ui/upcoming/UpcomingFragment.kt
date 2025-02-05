@@ -19,7 +19,7 @@ import com.dicoding.dicodingevent.ui.detail.DetailEventActivity
 
 class UpcomingFragment : Fragment() {
 
-    private lateinit var rvEvent: RecyclerView
+    private lateinit var rvUpcoming: RecyclerView
     private lateinit var adapter: EventAdapter
     private lateinit var progressBar: ProgressBar
     private lateinit var tvEmptyMessage: TextView
@@ -28,17 +28,17 @@ class UpcomingFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_event, container, false)
+        val view = inflater.inflate(R.layout.fragment_upcoming, container, false)
 
         // Inisialisasi View
-        rvEvent = view.findViewById(R.id.rvEvent)
+        rvUpcoming = view.findViewById(R.id.rvUpcoming)
         progressBar = view.findViewById(R.id.progressBar)
         tvEmptyMessage = view.findViewById(R.id.tvEmptyMessage)
 
         // Konfigurasi RecyclerView
-        rvEvent.layoutManager = LinearLayoutManager(context)
+        rvUpcoming.layoutManager = LinearLayoutManager(context)
         adapter = EventAdapter()
-        rvEvent.adapter = adapter
+        rvUpcoming.adapter = adapter
 
         // Observasi Data dari ViewModel
         viewModel.events.observe(viewLifecycleOwner, Observer { eventList ->
@@ -67,20 +67,20 @@ class UpcomingFragment : Fragment() {
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
             progressBar.visibility = View.VISIBLE
-            rvEvent.visibility = View.GONE
+            rvUpcoming.visibility = View.GONE
             tvEmptyMessage.visibility = View.GONE
         } else {
             progressBar.visibility = View.GONE
-            rvEvent.visibility = View.VISIBLE
+            rvUpcoming.visibility = View.VISIBLE
         }
     }
 
     private fun showEmptyMessage(isEmpty: Boolean) {
         if (isEmpty) {
-            rvEvent.visibility = View.GONE
+            rvUpcoming.visibility = View.GONE
             tvEmptyMessage.visibility = View.VISIBLE
         } else {
-            rvEvent.visibility = View.VISIBLE
+            rvUpcoming.visibility = View.VISIBLE
             tvEmptyMessage.visibility = View.GONE
         }
     }

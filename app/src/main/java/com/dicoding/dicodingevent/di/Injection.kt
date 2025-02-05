@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import com.dicoding.dicodingevent.data.local.room.EventDatabase
 import com.dicoding.dicodingevent.data.remote.ApiService
-import com.dicoding.dicodingevent.ui.favorite.FavoriteRepository
+import com.dicoding.dicodingevent.data.repository.EventRepository
 import com.dicoding.dicodingevent.ui.favorite.FavoriteViewModel
-import com.dicoding.dicodingevent.ui.favorite.FavoriteViewModelFactory
+import com.dicoding.dicodingevent.viewModelFavtory.FavoriteViewModelFactory
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -27,7 +27,7 @@ object Injection {
 
     fun provideFavoriteViewModel(owner: ViewModelStoreOwner, context: Context): FavoriteViewModel {
         val database = EventDatabase.getInstance(context)
-        val eventRepository = FavoriteRepository.getInstance(database.eventDao())
+        val eventRepository = EventRepository.getInstance(database.eventDao())
         val factory =
             FavoriteViewModelFactory(context.applicationContext as Application, eventRepository)
         return ViewModelProvider(owner, factory).get(FavoriteViewModel::class.java)

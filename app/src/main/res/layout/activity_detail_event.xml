@@ -35,7 +35,7 @@
                 android:src="@drawable/ic_favorite_border_24"
                 android:backgroundTint="@color/purple_200"
                 app:borderWidth="0dp"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.Fab.SlightlySquare"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Fab.round"
                 app:layout_constraintBottom_toTopOf="@id/tv_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.95"

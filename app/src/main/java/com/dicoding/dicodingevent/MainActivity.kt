@@ -14,7 +14,6 @@ import com.dicoding.dicodingevent.ui.settings.SettingPreferences
 import com.dicoding.dicodingevent.ui.settings.SettingViewModel
 import com.dicoding.dicodingevent.ui.settings.ViewModelFactory
 import com.dicoding.dicodingevent.ui.settings.dataStore
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,6 +33,8 @@ class MainActivity : AppCompatActivity() {
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
+
+            supportActionBar?.hide()
         }
 
         super.onCreate(savedInstanceState)
@@ -48,9 +49,9 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
+                R.id.navigation_home,
                 R.id.navigation_upcoming,
                 R.id.navigation_finished,
-                R.id.navigation_home,
                 R.id.navigation_favorite,
                 R.id.navigation_settings
             )

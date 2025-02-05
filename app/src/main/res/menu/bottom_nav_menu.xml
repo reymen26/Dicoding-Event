@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
+
+    <item
         android:id="@+id/navigation_upcoming"
         android:icon="@drawable/ic_calendar_month_24"
         android:title="@string/title_upcoming" />
@@ -10,11 +15,6 @@
         android:id="@+id/navigation_finished"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_finished" />
-
-    <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_favorite"

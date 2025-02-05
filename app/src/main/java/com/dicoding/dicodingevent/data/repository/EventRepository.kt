@@ -1,9 +1,9 @@
-package com.dicoding.dicodingevent.ui.favorite
+package com.dicoding.dicodingevent.data.repository
 
 import com.dicoding.dicodingevent.data.local.entity.EventEntity
 import com.dicoding.dicodingevent.data.local.room.EventDao
 
-class FavoriteRepository private constructor(private val eventDao: EventDao) {
+class EventRepository private constructor(private val eventDao: EventDao) {
 
     // Mengambil semua data favorit
     suspend fun getAllFavorites(): List<EventEntity> {
@@ -18,22 +18,17 @@ class FavoriteRepository private constructor(private val eventDao: EventDao) {
         eventDao.insertFavorite(favoriteEvent)
     }
 
-
     suspend fun deleteFavorite(favoriteEvent: EventEntity) {
         eventDao.deleteFavorite(favoriteEvent)
     }
 
-    suspend fun updateFavorite(favoriteEvent: EventEntity) {
-        eventDao.updateFavorite(favoriteEvent)
-    }
-
     companion object {
         @Volatile
-        private var instance: FavoriteRepository? = null
+        private var instance: EventRepository? = null
 
-        fun getInstance(dao: EventDao): FavoriteRepository =
+        fun getInstance(dao: EventDao): EventRepository =
             instance ?: synchronized(this) {
-                instance ?: FavoriteRepository(dao).also { instance = it }
+                instance ?: EventRepository(dao).also { instance = it }
             }
     }
 }
