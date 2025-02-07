@@ -1,4 +1,4 @@
-package com.dicoding.dicodingevent.ui.favorite
+package com.dicoding.dicodingevent.ui.favourite
 
 import android.app.Application
 import androidx.lifecycle.Lifecycle
@@ -10,7 +10,7 @@ import com.dicoding.dicodingevent.data.local.entity.EventEntity
 import com.dicoding.dicodingevent.data.repository.EventRepository
 import kotlinx.coroutines.launch
 
-class FavoriteViewModel(application: Application, private val repository: EventRepository) : ViewModel() {
+class FavouriteViewModel(application: Application, private val repository: EventRepository) : ViewModel() {
 
     private val _currentEvent = MutableLiveData<Lifecycle.Event>()
     val currentEvent: LiveData<Lifecycle.Event> = _currentEvent

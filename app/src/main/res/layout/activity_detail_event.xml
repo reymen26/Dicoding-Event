@@ -30,7 +30,7 @@
                 android:id="@+id/btn_favorite"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                android:contentDescription="@string/save_favorite"
+                android:contentDescription="@string/save_favourite"
                 android:padding="16dp"
                 android:src="@drawable/ic_favorite_border_24"
                 android:backgroundTint="@color/purple_200"

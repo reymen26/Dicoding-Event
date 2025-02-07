@@ -1,4 +1,4 @@
-package com.dicoding.dicodingevent.ui.favorite
+package com.dicoding.dicodingevent.ui.favourite
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,22 +13,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.dicodingevent.adapter.EventAdapter
 import com.dicoding.dicodingevent.data.response.ListEventsItem
-import com.dicoding.dicodingevent.databinding.FragmentFavoriteBinding
+import com.dicoding.dicodingevent.databinding.FragmentFavouriteBinding
 import com.dicoding.dicodingevent.di.Injection
 import com.dicoding.dicodingevent.ui.detail.DetailEventActivity
 
-class FavoriteFragment : Fragment() {
+class FavouriteFragment : Fragment() {
 
     private lateinit var rvFavorite: RecyclerView
     private lateinit var tvEmptyMessage: TextView
-    private lateinit var viewModel: FavoriteViewModel
+    private lateinit var viewModel: FavouriteViewModel
     private lateinit var adapter: EventAdapter
-    private lateinit var binding: FragmentFavoriteBinding
+    private lateinit var binding: FragmentFavouriteBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFavoriteBinding.inflate(inflater, container, false)
+        binding = FragmentFavouriteBinding.inflate(inflater, container, false)
 
         viewModel = Injection.provideFavoriteViewModel(this, requireContext())
 
@@ -42,14 +42,16 @@ class FavoriteFragment : Fragment() {
 
         // Observe daftar event favorit dari ViewModel
         viewModel.events.observe(viewLifecycleOwner) { favoriteEvents ->
-            Log.d("FavoriteFragment", "Number of favorite events: ${favoriteEvents.size}")
-            favoriteEvents?.let {
-                adapter.submitFavoriteList(it)  // Mengirim data favorit ke adapter
-                binding.rvFavorite.visibility = if (it.isNotEmpty()) View.VISIBLE else View.GONE
-            } ?: run {
-                Log.d("FavoriteFragment", "favoriteEvents is null")
+            Log.d("FavoriteFragment", "Number of favorite events: ${favoriteEvents?.size ?: 0}")
+
+            if (favoriteEvents.isNullOrEmpty()) {
+                showEmptyMessage(true)
+            } else {
+                showEmptyMessage(false)
+                adapter.submitFavoriteList(favoriteEvents)
             }
         }
+
 
         adapter.setOnItemClickCallback(object : EventAdapter.OnItemClickCallback {
             override fun onItemClicked(data: ListEventsItem) {
@@ -74,11 +76,11 @@ class FavoriteFragment : Fragment() {
 
     private fun showEmptyMessage(isEmpty: Boolean) {
         if (isEmpty) {
-            rvFavorite.visibility = View.GONE
-            tvEmptyMessage.visibility = View.VISIBLE
+            binding.rvFavorite.visibility = View.GONE
+            binding.tvEmptyMessage.visibility = View.VISIBLE
         } else {
-            rvFavorite.visibility = View.VISIBLE
-            tvEmptyMessage.visibility = View.GONE
+            binding.rvFavorite.visibility = View.VISIBLE
+            binding.tvEmptyMessage.visibility = View.GONE
         }
     }
 

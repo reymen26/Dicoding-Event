@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.dicodingevent.data.repository.EventRepository
 import com.dicoding.dicodingevent.ui.detail.DetailEventViewModel
-import com.dicoding.dicodingevent.ui.favorite.FavoriteViewModel
+import com.dicoding.dicodingevent.ui.favourite.FavouriteViewModel
 
 class DetailEventViewModelFactory(
     private val application: Application,
@@ -26,8 +26,8 @@ class FavoriteViewModelFactory(
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(FavoriteViewModel::class.java)) {
-            return FavoriteViewModel(application, repository) as T
+        if (modelClass.isAssignableFrom(FavouriteViewModel::class.java)) {
+            return FavouriteViewModel(application, repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
     }

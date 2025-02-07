@@ -2,9 +2,15 @@
     <string name="app_name">Dicoding Event</string>
     <string name="title_home">Home</string>
     <string name="title_settings">Settings</string>
-    <string name="title_favorite">Favorite</string>
+    <string name="title_favourite">Favourite</string>
     <string name="title_upcoming">Upcoming</string>
     <string name="title_finished">Finished</string>
+
+    <string name="home_heading">Recomendation Events for you!</string>
+    <string name="upcoming_heading">Upcoming Events</string>
+    <string name="favourite_heading">favourite Events</string>
+
+    <string name="subHeading">Recomendation Events for you!</string>
 
     <string name="button_home">Home</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -19,8 +25,9 @@
     <string name="register_disable">The Event Has Ended!</string>
 
     <string name="dark_mode">Dark Mode</string>
-    <string name="save_favorite">Save Favorite</string>
-    <string name="remove_favorite">Remove Favorite</string>
+    <string name="notification">Daily Reminder</string>
+    <string name="save_favourite">Save Favorite</string>
+    <string name="remove_favourite">Remove Favorite</string>
     <string name="search_hint">Search here!</string>
 
 </resources>
